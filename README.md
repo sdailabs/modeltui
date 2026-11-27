@@ -5,18 +5,22 @@
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(stdlib%20only)-brightgreen)](pyproject.toml)
 [![GitHub Stars](https://img.shields.io/github/stars/sdailabs/modeltui?style=social)](https://github.com/sdailabs/modeltui/stargazers)
 
+English | [简体中文](README.zh-CN.md)
+
 **Stop wasting expiring AI coding subscription quotas.**
 
 `model-tui` is a zero-proxy, zero-dependency Python CLI launcher that checks 5-hour and weekly quota reset windows across your AI coding subscription CLIs (at **0 LLM tokens**) and launches whichever available channel resets earliest.
 
-## Why not an API proxy (LiteLLM / Magpie / OpenRouter)?
+## Why a thin launcher instead of a proxy?
 
-API proxies sit in the HTTP path, require API keys or local proxy daemons, and can conflict with subscription-based TUI tools. `model-tui` does **not** proxy requests or touch your prompts:
+If you pay for multiple AI coding subscriptions (Claude Max, Codex, etc.), routing them through an HTTP proxy, OAuth relay, or headless `-p` wrapper is a fast way to trip provider ToS and risk getting your account banned.
 
-- **Zero proxy**: It inspects quota metadata once, then `exec`s your native interactive CLI (`claude`, `codex`, etc.) directly.
-- **Zero LLM tokens**: Uses native quota endpoints/probes and local session cooldown detection — never sends a test prompt.
-- **Earlier-reset routing**: If Subscription A resets in 4 hours and Subscription B resets in 5 days, burn Subscription A first so its quota does not expire unused.
-- **Interactive TUI only**: Explicitly rejects non-interactive print flags (`-p`, `--print`, `--output-format`, etc.) so subscription CLIs stay interactive.
+`model-tui` never sits between you and your provider:
+
+- **No proxy, no MITM — stay on the official CLI**: It checks quota metadata once, then hands the terminal directly to your native interactive CLI (`exec`). Once launched, `model-tui` is gone — your traffic, auth, and prompts look 100% identical to running `claude` by hand.
+- **Interactive TUI only (anti-ban guardrail)**: Explicitly rejects headless/non-interactive flags (`-p`, `--print`, `--output-format`) so you don't accidentally automate a human-use subscription.
+- **Zero LLM tokens**: Reads native quota endpoints and local cooldowns — never sends probe prompts or burns quota just to check availability.
+- **Earlier-reset routing**: If Subscription A resets in 4 hours and Subscription B resets in 5 days, it launches A first so expiring quota doesn't go to waste.
 
 ## Supported Providers
 
