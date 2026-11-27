@@ -1,5 +1,10 @@
 # model-tui
 
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(stdlib%20only)-brightgreen)](pyproject.toml)
+[![GitHub Stars](https://img.shields.io/github/stars/sdailabs/modeltui?style=social)](https://github.com/sdailabs/modeltui/stargazers)
+
 **Stop wasting expiring AI coding subscription quotas.**
 
 `model-tui` is a zero-proxy, zero-dependency Python CLI launcher that checks 5-hour and weekly quota reset windows across your AI coding subscription CLIs (at **0 LLM tokens**) and launches whichever available channel resets earliest.
