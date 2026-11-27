@@ -13,6 +13,15 @@ API proxies sit in the HTTP path, require API keys or local proxy daemons, and c
 - **Earlier-reset routing**: If Subscription A resets in 4 hours and Subscription B resets in 5 days, burn Subscription A first so its quota does not expire unused.
 - **Interactive TUI only**: Explicitly rejects non-interactive print flags (`-p`, `--print`, `--output-format`, etc.) so subscription CLIs stay interactive.
 
+## Supported Providers
+
+| Provider | Support Level | Built-in Models | Zero-Token Quota Probe |
+| :--- | :--- | :--- | :--- |
+| **Claude Code (`claude`)** | Built-in | `opus`, `sonnet`, `haiku` (plus `claude-*` aliases) | Yes — OAuth usage API (5-hour & 7-day weekly reset windows) + local cooldown fallback |
+| **Any other CLI / 2nd profile** (Codex CLI, Gemini CLI, Cursor CLI, Copilot CLI, etc.) | Pluggable (`probe_cmd` / `<provider>:<model>`) | Configured in `~/.config/model-tui.json` or ad-hoc `--model <provider>:<model>` | Via custom `probe_cmd` returning the 4-field JSON contract below |
+
+Want a built-in zero-token probe for another subscription CLI (Codex, Gemini CLI, Cursor, Copilot, etc.)? [Open an issue](https://github.com/sdailabs/modeltui/issues/new) with how your CLI exposes quota or reset timestamps, or submit a PR.
+
 ## Install
 
 Requires Python 3.10+ (standard library only, zero third-party packages).
