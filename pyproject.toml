@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "model-tui"
+version = "0.1.0"
+description = "Zero-proxy, zero-token CLI launcher that routes across AI coding subscriptions by earliest quota reset window."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+  {name = "model-tui contributors"},
+]
+keywords = ["cli", "claude-code", "quota", "router", "ai-coding", "tui"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Build Tools",
+]
+
+[project.scripts]
+model-tui = "model_tui:cli_main"
+
+[tool.setuptools]
+py-modules = ["model_tui"]
